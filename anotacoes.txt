@@ -1,0 +1,4 @@
+1 - O espaço " " antes do "%c" resolve o problema do enter.
+    scanf(" %c", &chute);
+2 - Ele escreve "MELANCIA\0", pq o "\0" informa que acabou a palavra.
+	sprintf(palavrasecreta, "MELANCIA");
