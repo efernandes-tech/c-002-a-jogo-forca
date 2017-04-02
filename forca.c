@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+// Header file desta aplicação.
+#include "forca.h"
 
 // Variaveis globais.
 char palavrasecreta[20];
