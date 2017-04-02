@@ -110,7 +110,7 @@ void adicionapalavra() {
 
     printf("Você deseja adicionar uma nova palavra no jogo (S/N)?");
     scanf(" %c", &quer); // O " " ignora o enter.
-    
+
     if (quer == 'S') {
         char novapalavra[20];
 
@@ -120,16 +120,30 @@ void adicionapalavra() {
         // Ponteiro que aponta para um arquivo.
         FILE* f;
 
-	    // Abre arquivo para escrever no final.
-	    f = fopen("palavras.txt", "a");
+	    // Abre arquivo para leitura e escrita.
+	    f = fopen("palavras.txt", "r+");
 	    if (f == 0) {
 	        printf("Banco de dados de palavras não disponível.\n\n");
 	        exit(1);
 	    }
-	
-	    // Escreve a palavra no arquivo.
-	    fprintf(f, "%s", novapalavra);
-	
+
+	    int qtd;
+	    fscanf(f, "%d", &qtd);
+	    
+	    qtd++;
+	    
+	    // Coloca o ponteiro de leitura do arquivo no inicio novamente.
+	    fseek(f, 0, SEEK_SET);
+	    
+	    // Reescreve a quantidade de palavras do arquivo.
+	    fprintf(f, "%d", qtd);
+	    
+	    // Vai para o final do arquivo.
+	    fseek(f, 0, SEEK_END);
+
+	    // Escreve a palavra no final do arquivo.
+	    fprintf(f, "\n%s", novapalavra);
+
 	    // Fecha.
 	    fclose(f);
     }

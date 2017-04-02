@@ -11,3 +11,4 @@
     	    int teste() {
     	        ...
             }
+4 - Sempre feche o arquivo aberto com "fopen()" e "fclose()", se não a maquina não salva alterações.
