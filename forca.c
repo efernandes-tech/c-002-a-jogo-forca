@@ -37,6 +37,16 @@ int jachutou(char letra) {
 }
 
 void desenhaforca() {
+    printf("  _______      \n");
+    printf(" |/      |     \n");
+    printf(" |      (_)    \n");
+    printf(" |      \\|/   \n");
+    printf(" |       |     \n");
+    printf(" |      / \\   \n");
+    printf(" |             \n");
+    printf("_|___          \n");
+    printf("\n\n");
+
     printf("Você já deu %d chutes\n", chutesdados);
 	int i;
     for(i = 0; i < strlen(palavrasecreta); i++) {
@@ -75,24 +85,8 @@ void escolhepalavra() {
 }
 
 int enforcou() {
-    int erros = 0, i;
-    // Vamos fazer o loop em todos os chutes dados.
-    for(i = 0; i < chutesdados; i++) {
-        int existe = 0, j;
-        // Agora vamos olhar letra a letra da palavra secreta e ver se encontramos o chute aqui.
-        for(j = 0; j < strlen(palavrasecreta); j++) {
-            if (chutes[i] == palavrasecreta[j]) {
-                // Encontramos, vamos quebrar o loop.
-                existe = 1;
-                break;
-            }
-        }
-        // Se nao encontrou, soma um na quantidade de erros.
-        if (!existe)
-			erros++;
-    }
-    // Se tivermos mais do que 5 erros, retornamos 1, caso contrario, retornamos 0.
-    return erros >= 5;
+	// Se tivermos mais do que 5 erros, retornamos 1, caso contrario, retornamos 0.
+    return chuteserrados() >= 5;
 }
 
 int ganhou() {
@@ -147,6 +141,28 @@ void adicionapalavra() {
 	    // Fecha.
 	    fclose(f);
     }
+}
+
+int chuteserrados() {
+    int erros = 0, i;
+    // Faz um loop em todos os chutes dados.
+    for(i = 0; i < chutesdados; i++) {
+    	if (!letraexiste(chutes[i])) {
+            erros++;
+        }
+    }
+    return erros;
+}
+
+int letraexiste(char letra) {
+	int j;
+    // Olha letra a letra da palavra secreta e ve se encontra o chute aqui.
+    for(j = 0; j < strlen(palavrasecreta); j++) {
+        if (letra == palavrasecreta[j]) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 int main() {

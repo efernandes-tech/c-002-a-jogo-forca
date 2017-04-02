@@ -7,5 +7,7 @@ void escolhepalavra();
 int enforcou();
 int ganhou();
 void adicionapalavra();
+int chuteserrados();
+int letraexiste(char letra);
 
 #define TAMANHO_PALAVRA 20
