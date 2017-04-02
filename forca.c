@@ -115,7 +115,7 @@ void adicionapalavra() {
         char novapalavra[20];
 
         printf("Digite a nova palavra, em letras maiúsculas: ");
-        scanf("%s", novapalavra);
+        scanf(" %s", novapalavra);
 
         // Ponteiro que aponta para um arquivo.
         FILE* f;
@@ -142,7 +142,7 @@ void adicionapalavra() {
 	    fseek(f, 0, SEEK_END);
 
 	    // Escreve a palavra no final do arquivo.
-	    fprintf(f, "\n%s", novapalavra);
+	    fprintf(f, "%s", novapalavra);
 
 	    // Fecha.
 	    fclose(f);
@@ -158,4 +158,6 @@ int main() {
 
 		chuta();
 	} while (!ganhou() && !enforcou());
+	
+	adicionapalavra();
 }
