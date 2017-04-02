@@ -37,15 +37,30 @@ int jachutou(char letra) {
 }
 
 void desenhaforca() {
-    printf("  _______      \n");
-    printf(" |/      |     \n");
-    printf(" |      (_)    \n");
-    printf(" |      \\|/   \n");
-    printf(" |       |     \n");
-    printf(" |      / \\   \n");
-    printf(" |             \n");
-    printf("_|___          \n");
-    printf("\n\n");
+    int erros = chuteserrados();
+
+	printf("  _______       \n");
+	printf(" |/      |      \n");
+	printf(" |      %c%c%c  \n",
+		(erros>=1?'(':' '),
+	    (erros>=1?'_':' '),
+		(erros>=1?')':' ')
+	);
+	printf(" |      %c%c%c  \n",
+		(erros>=3?'\\':' '),
+	    (erros>=2?'|':' '),
+		(erros>=3?'/': ' ')
+	);
+	printf(" |       %c     \n",
+		(erros>=2?'|':' ')
+	);
+	printf(" |      %c %c   \n",
+		(erros>=4?'/':' '),
+	    (erros>=4?'\\':' ')
+	);
+	printf(" |              \n");
+	printf("_|___           \n");
+	printf("\n\n");
 
     printf("Você já deu %d chutes\n", chutesdados);
 	int i;
