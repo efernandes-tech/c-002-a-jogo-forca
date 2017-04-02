@@ -50,9 +50,29 @@ void escolhepalavra() {
     sprintf(palavrasecreta, "MELANCIA");
 }
 
+int enforcou() {
+    int erros = 0, i;
+    // Vamos fazer o loop em todos os chutes dados.
+    for(i = 0; i < tentativas; i++) {
+        int existe = 0, j;
+        // Agora vamos olhar letra a letra da palavra secreta e ver se encontramos o chute aqui.
+        for(j = 0; j < strlen(palavrasecreta); j++) {
+            if (chutes[i] == palavrasecreta[j]) {
+                // Encontramos, vamos quebrar o loop.
+                existe = 1;
+                break;
+            }
+        }
+        // Se nao encontrou, soma um na quantidade de erros.
+        if (!existe)
+			erros++;
+    }
+    // Se tivermos mais do que 5 erros, retornamos 1, caso contrario, retornamos 0.
+    return erros >= 5;
+}
+
 int main() {
 	int acertou = 0;
-	int enforcou = 0;
 
 	abertura();
 	escolhepalavra();
@@ -61,5 +81,5 @@ int main() {
 		desenhaforca();
 
 		chuta();
-	} while (!acertou && !enforcou);
+	} while (!acertou && !enforcou());
 }
