@@ -7,3 +7,5 @@ void escolhepalavra();
 int enforcou();
 int ganhou();
 void adicionapalavra();
+
+#define TAMANHO_PALAVRA 20
