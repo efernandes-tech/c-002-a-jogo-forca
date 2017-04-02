@@ -4,7 +4,7 @@
 // Variaveis globais.
 char palavrasecreta[20];
 char chutes[26];
-int tentativas = 0;
+int chutesdados = 0;
 
 void abertura() {
 	printf("/*****************/\n");
@@ -18,13 +18,13 @@ void chuta() {
 	printf("Qual letra? ");
 	scanf(" %c", &chute);
 
-	chutes[tentativas] = chute;
-	tentativas++;
+	chutes[chutesdados] = chute;
+	chutesdados++;
 }
 
 int jachutou(char letra) {
 	int j, achou = 0;
-    for(j = 0; j < tentativas; j++) {
+    for(j = 0; j < chutesdados; j++) {
         if(chutes[j] == letra) {
             achou = 1;
             break;
@@ -34,7 +34,7 @@ int jachutou(char letra) {
 }
 
 void desenhaforca() {
-    printf("Você já deu %d chutes\n", tentativas);
+    printf("Você já deu %d chutes\n", chutesdados);
 	int i;
     for(i = 0; i < strlen(palavrasecreta); i++) {
         if(jachutou(palavrasecreta[i])) {
@@ -53,7 +53,7 @@ void escolhepalavra() {
 int enforcou() {
     int erros = 0, i;
     // Vamos fazer o loop em todos os chutes dados.
-    for(i = 0; i < tentativas; i++) {
+    for(i = 0; i < chutesdados; i++) {
         int existe = 0, j;
         // Agora vamos olhar letra a letra da palavra secreta e ver se encontramos o chute aqui.
         for(j = 0; j < strlen(palavrasecreta); j++) {
@@ -71,9 +71,17 @@ int enforcou() {
     return erros >= 5;
 }
 
-int main() {
-	int acertou = 0;
+int ganhou() {
+	int i;
+    for(i = 0; i < strlen(palavrasecreta); i++) {
+        if (!jachutou(palavrasecreta[i])) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
+int main() {
 	abertura();
 	escolhepalavra();
 
@@ -81,5 +89,5 @@ int main() {
 		desenhaforca();
 
 		chuta();
-	} while (!acertou && !enforcou());
+	} while (!ganhou() && !enforcou());
 }
