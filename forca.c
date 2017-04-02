@@ -105,6 +105,36 @@ int ganhou() {
     return 1;
 }
 
+void adicionapalavra() {
+    char quer;
+
+    printf("Você deseja adicionar uma nova palavra no jogo (S/N)?");
+    scanf(" %c", &quer); // O " " ignora o enter.
+    
+    if (quer == 'S') {
+        char novapalavra[20];
+
+        printf("Digite a nova palavra, em letras maiúsculas: ");
+        scanf("%s", novapalavra);
+
+        // Ponteiro que aponta para um arquivo.
+        FILE* f;
+
+	    // Abre arquivo para escrever no final.
+	    f = fopen("palavras.txt", "a");
+	    if (f == 0) {
+	        printf("Banco de dados de palavras não disponível.\n\n");
+	        exit(1);
+	    }
+	
+	    // Escreve a palavra no arquivo.
+	    fprintf(f, "%s", novapalavra);
+	
+	    // Fecha.
+	    fclose(f);
+    }
+}
+
 int main() {
 	abertura();
 	escolhepalavra();
