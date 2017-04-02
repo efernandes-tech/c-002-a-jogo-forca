@@ -18,6 +18,17 @@ void chuta(char chutes[], int* tentativas) { // Declaracao de ponteiro.
 	(*tentativas)++;
 }
 
+int jachutou(char letra, char* chutes, int tentativas) {
+	int j, achou = 0;
+    for(j = 0; j < tentativas; j++) {
+        if(chutes[j] == letra) {
+            achou = 1;
+            break;
+        }
+    }
+    return achou;
+}
+
 int main() {
 	char palavrasecreta[20];
 	sprintf(palavrasecreta, "MELANCIA");
@@ -35,17 +46,7 @@ int main() {
 
 		int i;
 		for(i = 0; i < strlen(palavrasecreta); i++) {
-			int achou = 0;
-
-			int j;
-			for(j = 0; j < tentativas; j++) {
-				if(chutes[j] == palavrasecreta[i]) {
-					achou = 1;
-					break;
-				}
-			}
-
-			if(achou) {
+			if(jachutou(palavrasecreta[i], chutes, tentativas)) {
 				printf("%c ", palavrasecreta[i]);
 			} else {
 				printf("_ ");
