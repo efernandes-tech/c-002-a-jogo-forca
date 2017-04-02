@@ -1,24 +1,28 @@
 #include <stdio.h>
 #include <string.h>
 
+// Variaveis globais.
+char palavrasecreta[20];
+char chutes[26];
+int tentativas = 0;
+
 void abertura() {
 	printf("/*****************/\n");
 	printf("/* Jogo de Forca */\n");
 	printf("/*****************/\n\n");
 }
 
-void chuta(char chutes[], int* tentativas) { // Declaracao de ponteiro.
+void chuta() {
 	char chute;
 
 	printf("Qual letra? ");
 	scanf(" %c", &chute);
 
-	// 
-	chutes[*tentativas] = chute; // Usando o ponteiro.
-	(*tentativas)++;
+	chutes[tentativas] = chute;
+	tentativas++;
 }
 
-int jachutou(char letra, char* chutes, int tentativas) {
+int jachutou(char letra) {
 	int j, achou = 0;
     for(j = 0; j < tentativas; j++) {
         if(chutes[j] == letra) {
@@ -29,33 +33,33 @@ int jachutou(char letra, char* chutes, int tentativas) {
     return achou;
 }
 
-int main() {
-	char palavrasecreta[20];
-	sprintf(palavrasecreta, "MELANCIA");
+void desenhaforca() {
+    printf("Você já deu %d chutes\n", tentativas);
+	int i;
+    for(i = 0; i < strlen(palavrasecreta); i++) {
+        if(jachutou(palavrasecreta[i])) {
+            printf("%c ", palavrasecreta[i]);
+        } else {
+            printf("_ ");
+        }
+    }
+    printf("\n");
+}
 
+void escolhepalavra() {
+    sprintf(palavrasecreta, "MELANCIA");
+}
+
+int main() {
 	int acertou = 0;
 	int enforcou = 0;
 
-	char chutes[26];
-	int tentativas = 0;
-
 	abertura();
+	escolhepalavra();
 
 	do {
-		printf("Você já deu %d chutes\n", tentativas);
+		desenhaforca();
 
-		int i;
-		for(i = 0; i < strlen(palavrasecreta); i++) {
-			if(jachutou(palavrasecreta[i], chutes, tentativas)) {
-				printf("%c ", palavrasecreta[i]);
-			} else {
-				printf("_ ");
-			}
-		}
-		printf("\n");
-
-		// Passagem de parametro por referencia (ponteiro) e nao por copia.
-		chuta(chutes, &tentativas);
+		chuta();
 	} while (!acertou && !enforcou);
-
 }
